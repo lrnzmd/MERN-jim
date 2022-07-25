@@ -1,27 +1,39 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const express = require('express')
+const express = require("express");
 
-const workputRouters = require('./routes/workouts')
+const mongoose = require("mongoose");
 
-const app = express()
+const workputRouters = require("./routes/workouts");
 
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
 app.use((req, res, next) => {
-    console.log(req.path, req.method)
-    next()
-})
+  console.log(req.path, req.method);
+  next();
+});
 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
     res.json({mssg: 'welcome here'})
-})
+}) */
 
-app.use('/api/workout', workputRouters )
+//routes
+app.use("/api/workout", workputRouters);
 
-//listen 
-app.listen(process.env.PORT, (req, res) => {
+// connect to db
+mongoose
+  .connect(process.env.MONG_URI)
+  .then(() => {
+    app.listen(process.env.PORT, (req, res) => {
+      console.log("connect to db end listen in port ", process.env.PORT);
+    });
+  })
+  .catch((err) => console.log(err));
+
+//listen
+/* app.listen(process.env.PORT, (req, res) => {
     console.log("listen in port ", process.env.PORT)
 })
-
+ */
