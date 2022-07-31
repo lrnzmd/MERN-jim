@@ -15,10 +15,6 @@ app.use((req, res, next) => {
   next();
 });
 
-/* app.get('/', (req, res) => {
-    res.json({mssg: 'welcome here'})
-}) */
-
 //routes
 app.use("/api/workout", workputRouters);
 
@@ -33,8 +29,3 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-//listen
-/* app.listen(process.env.PORT, (req, res) => {
-    console.log("listen in port ", process.env.PORT)
-})
- */
