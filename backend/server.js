@@ -4,7 +4,7 @@ const express = require("express");
 
 const mongoose = require("mongoose");
 
-const workputRouters = require("./routes/workout");
+const workputRouters = require("./routes/workouts");
 
 const app = express();
 
