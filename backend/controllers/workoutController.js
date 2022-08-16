@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const getWorkouts  = async (req, res) => {
     try {
       const workout = await Workout.find({}).sort({createdAt: -1});
-      res.status(200).json({ workout });
+      res.status(200).json( workout );
     } catch (error) {
       res.status(200).json({ error: error.message });
     }
