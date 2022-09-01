@@ -30,8 +30,6 @@ userSchema.statics.singup = async function(email, password){
         throw Error('Password not strong enough')
     }
 
-
-
     const extists = await this.findOne({email})
 
     if(extists){
@@ -44,6 +42,31 @@ userSchema.statics.singup = async function(email, password){
     const user = await this.create({email, password: hash})
 
     return user
+}
+
+userSchema.statics.login = async function(email, password){
+    if (!email || !password){
+        throw Error('All fields must be filled')
+    }
+
+    if(!validator.isEmail(email)){
+        throw Error('Email is not valid')
+    }
+
+    const user = await this.findOne({email})
+
+    if(!user){
+        throw Error('Incorrect email')
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if(!match){
+        throw Error('Incorrect password')
+    }
+
+    return user
+
 }
 
 module.exports = mongoose.model('User', userSchema)
