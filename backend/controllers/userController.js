@@ -21,12 +21,12 @@ const loginUser = async (req, res) => {
   }
 }
 
-// singup useer
-const singupUser = async (req, res) => {
+// signup useer
+const signupUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.singup(email, password)
+    const user = await User.signup(email, password)
 
     // create a token
     const token = createToken(user._id)
@@ -40,6 +40,6 @@ const singupUser = async (req, res) => {
 };
 
 module.exports = {
-  singupUser,
+  signupUser,
   loginUser,
 };
